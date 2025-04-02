@@ -1,0 +1,26 @@
+.animatedButton {
+  position: relative;
+  margin-left: 2rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.animatedButton::before {
+  content: "";
+  position: absolute;
+  left: calc(-2px - 2rem);
+  top: -2px;
+  width: 3rem;
+  height: 3rem;
+  border: 2px solid color-mix(in oklab, var(--color-white) 80%, transparent);
+  border-radius: 100%;
+  z-index: 2;
+  transition: all 0.4s ease-in-out;
+}
+
+.animatedButton:hover {
+  margin-left: 0;
+}
+
+.animatedButton:hover::before {
+  opacity: 0;
+}
