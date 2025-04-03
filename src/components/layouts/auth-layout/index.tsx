@@ -14,9 +14,11 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="px-3 py-4 h-screen flex justify-between gap-4">
       <div className="w-full lg:w-[calc(50%-0.5rem)]">
         <div className="bg-[#2C2C2C] p-5 rounded-2xl h-full lg:h-[calc(100%-9rem)] flex justify-center items-center">
-          <div className="md:max-w-[90%] w-full p-6 ">
+          <div className="max-w-lg w-full md:p-6">
             <h1 className="text-2xl font-bold mb-6">EvilMartians</h1>
-            <h3 className="text-4xl mb-6">Welcome to EvilMartians</h3>
+            <h3 className="text-4xl mb-6">
+              Welcome to <span className="font-semibold">EvilMartians</span>
+            </h3>
             <p className="opacity-[0.6]">
               Gaze and attention modeling powered by AI is optimizing virtual
               reality experiences

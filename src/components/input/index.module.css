@@ -1,0 +1,8 @@
+.focus,
+.focus > div {
+  border-color: var(--clr-white);
+}
+
+.focus svg {
+  color: var(--clr-white);
+}
