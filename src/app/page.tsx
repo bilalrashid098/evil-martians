@@ -1,10 +1,5 @@
-import AuthLayout from "@/components/layouts/auth-layout";
-import SignUpView from "@/views/signup";
+import HomeView from "@/views/home";
 
 export default function Home() {
-  return (
-    <AuthLayout>
-      <SignUpView />
-    </AuthLayout>
-  );
+  return <HomeView />;
 }

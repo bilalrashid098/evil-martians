@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import AuthBg from "@/public/assets/auth-bg.jpg";
 import UserOne from "@/public/assets/user.avif";
@@ -6,9 +8,18 @@ import UserThree from "@/public/assets/user3.jpg";
 import Avatar from "@/components/avatar";
 import ArrowButton from "@/components/buttons/arrow-button";
 import AnimatedButton from "@/components/buttons/animation-button";
+import { useRouter } from "next/navigation";
+import { routes } from "@/config/routes";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const Users = [UserOne, UserTwo, UserThree];
+  const router = useRouter();
+  const accessToken = localStorage.getItem("accessToken");
+
+  if (accessToken) {
+    router.replace(routes.home);
+    return;
+  }
 
   return (
     <div className="px-3 py-4 h-screen flex justify-between gap-4">

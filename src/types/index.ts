@@ -38,3 +38,23 @@ export interface BreakerProps {
   title: string;
   className?: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  username: string;
+  [key: string]: any;
+}
+
+export interface UserContextType {
+  user: User | null;
+  setUser: (user: User | null) => void;
+  signOut: () => void;
+}
+
+export interface ResponseProps {
+  status: number;
+  data?: any;
+  error?: any;
+}

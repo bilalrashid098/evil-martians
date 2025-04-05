@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import { UserProvider } from "@/context/UserContext";
+import AuthProvider from "@/config/auth-provider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -20,7 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>{children}</body>
+      <body className={`${poppins.variable} antialiased`}>
+        <UserProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </UserProvider>
+        <Toaster />
+      </body>
     </html>
   );
 }
