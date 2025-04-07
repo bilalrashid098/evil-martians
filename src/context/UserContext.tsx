@@ -3,6 +3,7 @@
 import { routes } from "@/config/routes";
 import { User, UserContextType } from "@/types";
 import { createContext, useContext, useState, ReactNode } from "react";
+import Cookies from "js-cookie";
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -10,7 +11,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   function signOut() {
-    localStorage.removeItem("accessToken");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
     window.location.href = routes.login;
     setTimeout(() => {
       setUser(null);

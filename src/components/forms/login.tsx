@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { BiEnvelope } from "react-icons/bi";
 import { FaGoogle } from "react-icons/fa6";
 import { IoMdLock } from "react-icons/io";
+import Cookies from "js-cookie";
 
 const LoginForm = () => {
   const {
@@ -27,15 +28,15 @@ const LoginForm = () => {
   const onSubmit = async (data: any) => {
     const payload = {
       ...data,
-      // expiresInMins: '1440'
-      expiresInMins: "1",
+      expiresInMins: 1440,
     };
     const response: ResponseProps = await axios.post("/auth/login", payload);
 
     if (response.status === 200) {
       setUser(response.data);
-      localStorage.setItem("accessToken", response.data.accessToken);
-      router.push(routes.home);
+      Cookies.set("accessToken", response.data.accessToken, { expires: 1 });
+      Cookies.set("refreshToken", response.data.refreshToken, { expires: 7 });
+      router.replace(routes.home);
     } else {
       toast.error(response.error.message);
     }

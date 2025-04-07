@@ -58,3 +58,9 @@ export interface ResponseProps {
   data?: any;
   error?: any;
 }
+
+export interface DecodedToken {
+  exp: number; // expiry in seconds
+  iat: number;
+  [key: string]: any;
+}

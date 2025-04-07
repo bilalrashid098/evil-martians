@@ -1,4 +1,5 @@
 import ax from "axios";
+import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { routes } from "./routes";
 
@@ -11,7 +12,7 @@ export const axios = ax.create({
 
 axios.interceptors.request.use(
   async (config) => {
-    const token = localStorage.getItem("accessToken");
+    const token = Cookies.get("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -35,30 +36,35 @@ axios.interceptors.response.use(
 
     if (error.response && error.response.status === 401) {
       // Handle unauthorized access
+
       toast.error("Session expired, redirecting to signin...");
       console.error("Session expired, redirecting to signin...");
-      localStorage.removeItem("accessToken");
-      window.location.href = routes.login;
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
+
+    //   const payload = {
+    //     refreshToken: Cookies.get("refreshToken"),
+    //     expiresInMins: 1,
+    //   };
+
+    //   axios
+    //     .post("/auth/refresh", payload)
+    //     .then((res) => {
+    //       console.log("refresh token", res.data);
+    //       Cookies.set("accessToken", res.data.accessToken, { expires: 1 });
+    //       Cookies.set("refreshToken", res.data.refreshToken, { expires: 7 });
+    //     })
+    //     .catch(() => {
+    //       toast.error("Session expired, redirecting to signin...");
+    //       console.error("Session expired, redirecting to signin...");
+    //       Cookies.remove("accessToken");
+    //       Cookies.remove("refreshToken");
+    //       window.location.href = routes.login;
+    //     });
+
       return Promise.reject(error);
     }
 
     return { status: error.status, error: error.response.data };
-
-    // if (
-    //   error.response &&
-    //   (error.response.status === 400 || error.response.status === 403)
-    // ) {
-    //   return error.response.data;
-    // }
-    // if (error.response && error.response.status === 401) {
-    //   console.log("axios Error", error);
-    //   // Handle unauthorized access
-    //   console.error("Session expired, redirecting to signin...");
-    //   toast.error("Session expired, redirecting to signin...");
-    //   // NotificationManager.updateNotificationModalCounter();
-    //   // You can perform redirection or other actions here
-    // } else {
-    //   return Promise.reject(error);
-    // }
   }
 );
