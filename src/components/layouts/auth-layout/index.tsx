@@ -8,7 +8,6 @@ import UserThree from "@/public/assets/user3.jpg";
 import Avatar from "@/components/avatar";
 import ArrowButton from "@/components/buttons/arrow-button";
 import AnimatedButton from "@/components/buttons/animation-button";
-import { useRouter } from "next/navigation";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const Users = [UserOne, UserTwo, UserThree];

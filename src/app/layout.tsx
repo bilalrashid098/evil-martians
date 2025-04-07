@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { UserProvider } from "@/context/UserContext";
 import AuthProvider from "@/config/auth-provider";
+import ThemeProvider from "@/config/theme-provider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} antialiased`}>
         <UserProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </AuthProvider>
         </UserProvider>
         <Toaster />
       </body>
